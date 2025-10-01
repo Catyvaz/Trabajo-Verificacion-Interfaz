@@ -1,4 +1,5 @@
 import type { ReactElement } from "react";
+import "../style/contenedor.css"
 
 
 interface ContenedorEjemplosProps {
