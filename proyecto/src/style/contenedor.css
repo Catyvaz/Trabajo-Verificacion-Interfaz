@@ -1,6 +1,7 @@
 .contenedor-ejemplos{
  border-radius: 20px;
  border: 1px solid white;
- margin: 10%;   
- padding: 10%;
+ align-content: center;
+ justify-items: center;
+    padding: 8%;
 }
