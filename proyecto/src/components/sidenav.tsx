@@ -1,0 +1,37 @@
+import type { JSX, ReactElement } from "react";
+import { type ItemsProps } from "../App";
+import { Link } from "react-router-dom";
+import "../style/sidenav.css"
+
+interface SidenavProps {
+  listaItems: ItemsProps[];
+  contenido: ReactElement;
+}
+
+export const Sidenav = ({
+  listaItems,
+  contenido,
+}: SidenavProps): JSX.Element => {
+  return (
+    <>
+      <div className="contenedor-principal">
+        <ul className="contenedor-lista-elementos">
+          {listaItems.map((item) => (
+            <li key={item.id}>
+              <Link
+                to={item.link}
+                className={`nav-link text-white d-flex align-items-center ${
+                  item.activo ? "active" : ""
+                }`}
+                aria-current={item.activo ? "page" : undefined}
+              >
+                <item.icono className="menuItem-icono" />
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <div className="contenedor-contenido">{contenido}</div>
+      </div>
+    </>
+  );
+};
