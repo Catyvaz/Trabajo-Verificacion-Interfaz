@@ -1,6 +1,8 @@
 import React from "react";
 import "../style/fechaIncorrecta.css";
 import Button from "@mui/joy/Button";
+import Alert from "@mui/material/Alert";
+import { MensajeAviso, MensajeExito } from "./mensajes";
 
 export const FechaIncorrecta: React.FC = () => {
   const [datosFormulario, setDatosFormulario] = React.useState({
@@ -19,6 +21,23 @@ export const FechaIncorrecta: React.FC = () => {
       ...prevDatos,
       [name]: value,
     }));
+  };
+
+  const envio = (): void => {
+    if (!datosFormulario.dia || !datosFormulario.mes || !datosFormulario.anio) {
+      MensajeAviso("Por favor, complete todos los campos de la fecha.");
+      return;
+    } else {
+      MensajeExito(
+        "Fecha enviada correctamente " +
+          datosFormulario.dia +
+          " / " +
+          datosFormulario.mes +
+          " / " +
+          datosFormulario.anio
+      );
+      setDatosFormulario({ dia: "", mes: "", anio: "" });
+    }
   };
 
   return (
@@ -75,8 +94,10 @@ export const FechaIncorrecta: React.FC = () => {
         <Button
           color="success"
           disabled={false}
-          onClick={() => {alert('Fecha enviada'), setDatosFormulario({ dia: "", mes: "", anio: "" })}}
-          size="md"
+          onClick={() => {
+            envio();
+          }}
+          size="lg"
           variant="solid"
           className="boton-enviar"
         >

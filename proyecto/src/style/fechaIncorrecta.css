@@ -1,5 +1,5 @@
 form {
-  width: 80%;
+  width: 50%;
   display: grid;
   justify-items: center;
   align-items: center;
@@ -10,16 +10,14 @@ form {
   padding: 3%;
   gap: 0%;
 }
-
-/* Estilos para los desplegables */
+ 
 select {
   appearance: none;
-  background: #f9fafb;
-  border: 1.5px solid #d1d5db;
+  background: #f0dbff;
+  border: 1.5px solid #2a0064;
   border-radius: 8px;
-  padding: 12px 14px;
-  padding-right: 35px;
-  font-size: 15px;
+  padding: 10px 30px;
+  font-size: 1.2rem;
   font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
   color: #22262e;
   cursor: pointer;
@@ -28,57 +26,18 @@ select {
 
 /* Estados hover y focus para desplegables */
 select:hover {
-  border-color: #9ca3af;
-  background-color: #ffffff;
+  border-color: #2a0064;
+  background-color: #D6C1E6;
 }
 
 select:focus {
   outline: none;
-  border: 2px solid #124596;
-  background-color: #ffffff;
+  border: 2px solid #2a0064;
+  background-color: #fcf8ff;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-/* Estilo para opciones placeholder */
 select option[value=""] {
   color: #9ca3af;
 }
 
-/* Responsive para dispositivos móviles */
-@media (max-width: 640px) {
-  form {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 16px;
-    margin: 20px;
-    padding: 20px;
-  }
-
-  .campo-fecha {
-    flex: none;
-  }
-
-  select {
-    min-width: 100%;
-  }
-
-  button[type="submit"] {
-    width: 100%;
-  }
-}
-
-/* Animación sutil de aparición */
-form {
-  animation: fadeInUp 0.4s ease-out;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}

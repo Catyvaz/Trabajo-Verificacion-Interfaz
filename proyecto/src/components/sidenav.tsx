@@ -24,8 +24,10 @@ export const Sidenav = ({
                   item.activo ? "active" : ""
                 }`}
                 aria-current={item.activo ? "page" : undefined}
+                title={item.nombre}
+                aria-label={item.nombre}
               >
-                <item.icono className="menuItem-icono" />
+                <item.icono className="menuItem-icono"  />
               </Link>
             </li>
           ))}
