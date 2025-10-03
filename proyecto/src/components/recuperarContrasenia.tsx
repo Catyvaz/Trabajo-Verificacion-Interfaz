@@ -6,12 +6,16 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import "../style/recuperarContrasenia.css";
+import { EnvioMailMet } from "./envioMailMet";
 
 const steps = ["Email", "Código", "Nueva Contraseña"];
 
 export const RecuperarContrasenia: React.FC = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set<number>());
+  const [email, setEmail] = React.useState("");
+  const [codigo, setCodigo] = React.useState("");
+  const [codigoIngresado, setCodigoIngresado] = React.useState("");
 
   const isStepSkipped = (step: number) => {
     return skipped.has(step);
@@ -34,6 +38,20 @@ export const RecuperarContrasenia: React.FC = () => {
 
   const handleReset = () => {
     setActiveStep(0);
+  };
+
+  const codeGenerator = () => {
+    return Math.floor(100000 + Math.random() * 900000).toString();
+  };
+
+  const sendEmail = async () => {
+    const codigoGenerado = codeGenerator();
+    setCodigo(codigoGenerado);
+    try {
+      await EnvioMailMet(email, `Tu código de verificación es: ${codigoGenerado}`);
+    } catch (error) {
+      console.error("Error enviando el correo:", error);
+    }
   };
 
   return (
@@ -59,7 +77,7 @@ export const RecuperarContrasenia: React.FC = () => {
 
       {activeStep === 0 && (
         <div className="contenido-step">
-          <Typography>
+          <Typography className="texto-pasos">
             Ingresa tu correo electrónico para recibir un código de
             verificación.
           </Typography>
@@ -67,12 +85,16 @@ export const RecuperarContrasenia: React.FC = () => {
             type="email"
             placeholder="Correo Electrónico"
             className="input-step"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
           />
         </div>
       )}
       {activeStep === 1 && (
         <div className="contenido-step">
-          <Typography>Ingresa código de verificación.</Typography>
+          <Typography className="texto-pasos">
+            Ingresa código de verificación.
+          </Typography>
           <input
             type="text"
             placeholder="Código de Seguridad"
@@ -82,7 +104,9 @@ export const RecuperarContrasenia: React.FC = () => {
       )}
       {activeStep === 2 && (
         <div className="contenido-step">
-          <Typography>Ingresa la nueva contraseña.</Typography>
+          <Typography className="texto-pasos">
+            Ingresa la nueva contraseña.
+          </Typography>
           <input
             type="text"
             placeholder="Nueva contraseña"
@@ -108,12 +132,19 @@ export const RecuperarContrasenia: React.FC = () => {
               color="inherit"
               disabled={activeStep === 0}
               onClick={handleBack}
-              sx={{ mr: 1 }}
+              sx={{ mr: 1, color: "white" }}
             >
               Back
             </Button>
             <Box sx={{ flex: "1 1 auto" }} />
-            <Button onClick={handleNext}>
+            <Button
+              onClick={async () => {
+                if (activeStep === 0) {
+                  await sendEmail();
+                }
+                handleNext();
+              }}
+            >
               {activeStep === steps.length - 1 ? "Finish" : "Next"}
             </Button>
           </Box>
