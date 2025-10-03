@@ -1,16 +1,18 @@
 import type { JSX, ReactElement } from "react";
 import { type ItemsProps } from "../App";
 import { Link } from "react-router-dom";
-import "../style/sidenav.css"
+import "../style/sidenav.css";
 
 interface SidenavProps {
   listaItems: ItemsProps[];
   contenido: ReactElement;
+  titulo?: string;
 }
 
 export const Sidenav = ({
   listaItems,
   contenido,
+  titulo,
 }: SidenavProps): JSX.Element => {
   return (
     <>
@@ -27,12 +29,17 @@ export const Sidenav = ({
                 title={item.nombre}
                 aria-label={item.nombre}
               >
-                <item.icono className="menuItem-icono"  />
+                <item.icono className="menuItem-icono" />
               </Link>
             </li>
           ))}
         </ul>
-        <div className="contenedor-contenido">{contenido}</div>
+        <div className="contenedor-contenido">
+          <header>
+            <h1 className="titulo-contenido">{titulo}</h1>
+          </header>
+          <div className="contenedor-ejercicio">{contenido}</div>
+        </div>
       </div>
     </>
   );
