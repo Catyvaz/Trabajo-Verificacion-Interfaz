@@ -34,10 +34,10 @@
 .contenedor-lista-elementos li a {
   text-decoration: none;
   color: white;
-   display: inline-flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px; 
+  width: 48px;
   height: 48px;
   border-radius: 50%;
 }
@@ -49,6 +49,15 @@ li .nav-link.active {
 }
 
 .contenedor-contenido {
-    justify-items: center;
-    align-content: center;
+  display: grid;
+  grid-template-rows: 1fr 8fr;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-content: center;
+}
+
+.contenedor-ejercicio {
+  width: 100%;
+  justify-items: center;
+  align-content: center;
 }
