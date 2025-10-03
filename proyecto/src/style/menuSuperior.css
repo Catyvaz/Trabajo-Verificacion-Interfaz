@@ -1,0 +1,38 @@
+header {
+  width: 100%;
+  background-color: #333;
+  color: white;
+  padding: 1% 0%;
+  text-align: center;
+}
+
+.contenedor-elementos {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 3svh;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  display: flex;
+  flex-direction: row;
+}
+
+li {
+  color: white;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+li a {
+  color: rgb(210, 181, 230);
+  text-decoration: none;
+}
+
+li a:hover {
+  color: blueviolet;
+}

@@ -1,0 +1,19 @@
+.contenedor-stepper {
+  width: 100%;
+  grid-template-columns: repeat(4, 1fr);
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  padding: 3%;
+  gap: 2%;
+}
+
+.stepLabel{
+    color: black !important;
+    font-weight: 600 !important;
+}
+
+.contenido-step{
+    margin: 2%;
+    margin-top: 4%;
+}

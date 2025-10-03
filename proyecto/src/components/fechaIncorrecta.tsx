@@ -75,7 +75,7 @@ export const FechaIncorrecta: React.FC = () => {
         <Button
           color="success"
           disabled={false}
-          onClick={() => {alert('Fecha enviada')}}
+          onClick={() => {alert('Fecha enviada'), setDatosFormulario({ dia: "", mes: "", anio: "" })}}
           size="md"
           variant="solid"
           className="boton-enviar"
