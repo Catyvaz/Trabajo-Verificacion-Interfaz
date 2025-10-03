@@ -9,7 +9,7 @@ import HttpsOutlinedIcon from '@mui/icons-material/HttpsOutlined';
 import { Route, Routes, useLocation } from "react-router-dom";
 import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
 import { Sidenav } from "./components/sidenav";
-import { RecuperarContrasenia } from "./components/recuperarContrasenia";
+import { RecuperarContrasenia } from "./components/recuperarContraseña/recuperarContrasenia";
 import ReglaDeNegocio from "./components/reglaDeNegocio";
 import { MenuSuperior } from "./components/menuSuperior/menuSuperior";
 
