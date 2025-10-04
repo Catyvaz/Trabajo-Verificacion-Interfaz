@@ -47,11 +47,9 @@ export const RecuperarContrasenia: React.FC = () => {
   const sendEmail = async () => {
     const codigoGenerado = codeGenerator();
     setCodigo(codigoGenerado);
-    try {
-      await EnvioMailMet(email, `Tu código de verificación es: ${codigoGenerado}`);
-    } catch (error) {
-      console.error("Error enviando el correo:", error);
-    }
+
+    
+
   };
 
   return (
