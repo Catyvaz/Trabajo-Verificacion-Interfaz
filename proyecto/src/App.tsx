@@ -12,6 +12,7 @@ import { Sidenav } from "./components/sidenav";
 import { RecuperarContrasenia } from "./components/recuperarContraseña/recuperarContrasenia";
 import ReglaDeNegocio from "./components/reglaDeNegocio";
 import { MenuSuperior } from "./components/menuSuperior/menuSuperior";
+import { ContraseniaIncorrecta } from "./components/contraseniaIncorrecta";
 
 
 const ROUTES = {
@@ -119,7 +120,7 @@ const AppContent = () => {
         element={
             <Sidenav
               listaItems={menuItems}
-              contenido={<ReglaDeNegocio />}
+              contenido={<ContraseniaIncorrecta />}
             />
         }
       />

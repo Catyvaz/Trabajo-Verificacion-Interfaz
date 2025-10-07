@@ -4,7 +4,7 @@ import { Bounce, toast } from "react-toastify";
 export const MensajeExito = (mensaje: string): JSX.Element => {
     toast.success(mensaje, {
     position: "top-right",
-    autoClose: 5000,
+    autoClose: 6000,
     hideProgressBar: false,
     closeOnClick: false,
     pauseOnHover: true,
@@ -31,3 +31,17 @@ export const MensajeAviso = (mensaje: string): JSX.Element => {
     return <></>;
 };
 
+export const MensajeError = (mensaje: string): JSX.Element => {
+    toast.error(mensaje, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce
+  });
+    return <></>;
+};

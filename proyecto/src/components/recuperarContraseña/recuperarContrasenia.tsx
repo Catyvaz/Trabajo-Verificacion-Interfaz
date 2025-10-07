@@ -5,8 +5,8 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import "../style/recuperarContrasenia.css";
-import { EnvioMailMet } from "./envioMailMet";
+import "../../style/recuperarContrasenia.css";
+import { MensajeAviso, MensajeError, MensajeExito } from "../mensajes";
 
 const steps = ["Email", "Código", "Nueva Contraseña"];
 
@@ -27,6 +27,18 @@ export const RecuperarContrasenia: React.FC = () => {
       newSkipped = new Set(newSkipped.values());
       newSkipped.delete(activeStep);
     }
+    if (activeStep === 0 && email === "") {
+      MensajeAviso("Por favor, ingresa un correo electrónico válido.");
+      return;
+    } else if (activeStep === 0 && email !== "") {
+      sendEmail();
+    }
+    if (activeStep === 1 && codigo !== codigoIngresado) {
+      MensajeError("El código ingresado es incorrecto.");
+      return;
+    } else if (activeStep === 1 && codigo === codigoIngresado) {
+      MensajeExito("Código verificado correctamente.");
+    }
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
@@ -38,6 +50,9 @@ export const RecuperarContrasenia: React.FC = () => {
 
   const handleReset = () => {
     setActiveStep(0);
+    setEmail("");
+    setCodigo("");
+    setCodigoIngresado("");
   };
 
   const codeGenerator = () => {
@@ -45,11 +60,9 @@ export const RecuperarContrasenia: React.FC = () => {
   };
 
   const sendEmail = async () => {
-    const codigoGenerado = codeGenerator();
-    setCodigo(codigoGenerado);
-
-    
-
+    const codigo = codeGenerator();
+    setCodigo(codigo);
+    MensajeExito("Código enviado a tu correo: " + codigo);
   };
 
   return (
@@ -75,49 +88,50 @@ export const RecuperarContrasenia: React.FC = () => {
 
       {activeStep === 0 && (
         <div className="contenido-step">
-          <Typography className="texto-pasos">
+          <label className="texto-pasos">
             Ingresa tu correo electrónico para recibir un código de
             verificación.
-          </Typography>
+          </label>
           <input
             type="email"
             placeholder="Correo Electrónico"
             className="input-step"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
+            required
           />
         </div>
       )}
       {activeStep === 1 && (
         <div className="contenido-step">
-          <Typography className="texto-pasos">
-            Ingresa código de verificación.
-          </Typography>
+          <label className="texto-pasos">Ingresa código de verificación.</label>
           <input
             type="text"
             placeholder="Código de Seguridad"
             className="input-step"
+            onChange={(e) => setCodigoIngresado(e.target.value)}
+            value={codigoIngresado}
+            required
           />
         </div>
       )}
       {activeStep === 2 && (
         <div className="contenido-step">
-          <Typography className="texto-pasos">
-            Ingresa la nueva contraseña.
-          </Typography>
+          <label className="texto-pasos">Ingresa la nueva contraseña.</label>
           <input
-            type="text"
+            type="password"
             placeholder="Nueva contraseña"
             className="input-step"
+            required
           />
         </div>
       )}
 
       {activeStep === steps.length ? (
         <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
+          <label className="texto-pasos final">
             All steps completed - you&apos;re finished
-          </Typography>
+          </label>
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Box sx={{ flex: "1 1 auto" }} />
             <Button onClick={handleReset}>Reset</Button>
@@ -125,27 +139,35 @@ export const RecuperarContrasenia: React.FC = () => {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-            <Button
-              color="inherit"
-              disabled={activeStep === 0}
-              onClick={handleBack}
-              sx={{ mr: 1, color: "white" }}
-            >
-              Back
-            </Button>
-            <Box sx={{ flex: "1 1 auto" }} />
-            <Button
-              onClick={async () => {
-                if (activeStep === 0) {
-                  await sendEmail();
-                }
-                handleNext();
-              }}
-            >
-              {activeStep === steps.length - 1 ? "Finish" : "Next"}
-            </Button>
-          </Box>
+          {activeStep === 0 ? (
+            <Box sx={{ display: "flex", flexDirection: "row", pt: 2, justifyContent: "flex-end" }}>
+              <Button
+                onClick={async () => {
+                  handleNext();
+                }}
+              >
+                {activeStep === steps.length - 1 ? "Finish" : "Next"}
+              </Button>
+            </Box>
+          ) : (
+            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+              <Button
+                disabled={activeStep === 0}
+                onClick={handleBack}
+                sx={{ mr: 1, color: "white" }}
+              >
+                Back
+              </Button>
+              <Box sx={{ flex: "1 1 auto" }} />
+              <Button
+                onClick={async () => {
+                  handleNext();
+                }}
+              >
+                {activeStep === steps.length - 1 ? "Finish" : "Next"}
+              </Button>
+            </Box>
+          )}
         </React.Fragment>
       )}
     </Box>

@@ -1,5 +1,5 @@
 .contenedor-stepper {
-  width: 100%;
+  width: 80%;
   grid-template-columns: repeat(4, 1fr);
   background: #ffffff;
   border-radius: 12px;
