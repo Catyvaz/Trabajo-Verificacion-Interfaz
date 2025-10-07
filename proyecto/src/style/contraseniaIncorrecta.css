@@ -1,0 +1,60 @@
+.cont-contra {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.label-contra {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1%;
+}
+
+.info-contra {
+  width: 90%;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.input-contra {
+  padding: 0.5rem;
+  font-size: 1.1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.cont-vernover {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cont-vernover .input-contra {
+  width: 100%;
+  padding-right: 3rem;
+  position: relative;
+}
+
+.boton-ojo {
+  position: absolute;
+  top: 50%;
+  right: calc(23% + -32px); /* ajusta si el input cambia de ancho */
+  transform: translateY(0%);
+  background:none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+
+/* En pantallas pequeñas el input ocupa más ancho, reajustar posición */
+@media (max-width: 900px) {
+  .boton-ojo {
+    right: 16px;
+  }
+  .input-contra {
+    width: 70%;
+  }
+}
