@@ -1,43 +1,39 @@
 form {
-  width: 50%;
-  display: grid;
+  width: 45%;
+  display: flex;
+  flex-direction: column;
   justify-items: center;
   align-items: center;
   grid-template-columns: repeat(4, 1fr);
   background-color: rgb(255, 255, 255, 60%);
   backdrop-filter: blur(50px);
+  box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   border: 1px solid #e5e7eb;
-  padding: 4%;
+  padding: 3% 1%;
+  gap: 1.5rem;
 }
- 
-select {
-  appearance: none;
-  background: #f0dbff;
-  border: 1.5px solid #2a0064;
-  border-radius: 8px;
-  padding: 10px 30px;
+
+.area-ingreso-data{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.label-fecha{
   font-size: 1.2rem;
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-  color: #22262e;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  font-weight: 600;
+  color: #333;
 }
 
-/* Estados hover y focus para desplegables */
-select:hover {
-  border-color: #2a0064;
-  background-color: #D6C1E6;
+.input-fecha{
+  align-self: center;
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 1.1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 70%;
+  box-sizing: border-box;
 }
-
-select:focus {
-  outline: none;
-  border: 2px solid #2a0064;
-  background-color: #fcf8ff;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-select option[value=""] {
-  color: #9ca3af;
-}
-

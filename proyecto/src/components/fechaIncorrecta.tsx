@@ -1,109 +1,107 @@
-import React from "react";
+import React, { useState } from "react";
 import "../style/fechaIncorrecta.css";
 import Button from "@mui/joy/Button";
-import Alert from "@mui/material/Alert";
 import { MensajeAviso, MensajeExito } from "./mensajes";
 
 export const FechaIncorrecta: React.FC = () => {
-  const [datosFormulario, setDatosFormulario] = React.useState({
-    dia: "",
-    mes: "",
-    anio: "",
-  });
+  const [fecha, setFecha] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const patron = /^(\d{2})\/(\d{2})\/(\d{4})$/;
 
-  const manejarCambio = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) => {
-    const { name, value } = e.target;
-    setDatosFormulario((prevDatos) => ({
-      ...prevDatos,
-      [name]: value,
-    }));
+  const validarFecha = (fecha: string) => {
+    const match = fecha.match(patron);
+    if (!match) {
+      MensajeAviso("Formato de fecha inválido. Use dd/mm/aaaa");
+      return false;
+    }
+
+    const [, diaStr, mesStr, anioStr] = match;
+    const dia = parseInt(diaStr, 10);
+    const mes = parseInt(mesStr, 10);
+    const anio = parseInt(anioStr, 10);
+
+    const errores: string[] = [];
+
+    //val dia
+    if (dia < 1 || dia > 31) {
+      errores.push("Día inválido. Debe estar entre 01 y 31.");
+    }
+    //val mes, donde se supone esta el error
+    if (mes < 1) {
+      errores.push("Mes inválido. Debe estar entre 01 y 12.");
+    }
+    // val año
+    if (anio < 1900 || anio > 2025) {
+      errores.push("Año inválido. Debe estar entre 1900 y 2025.");
+    }
+    if (errores.length === 0 && anio === 2025) {
+      const fechaAhora = new Date();
+      if (mes > fechaAhora.getMonth() + 1) {
+        errores.push("Mes inválido. No puede ser una fecha futura");
+      } else if (
+        mes === fechaAhora.getMonth() + 1 &&
+        dia > fechaAhora.getDate()
+      ) {
+        errores.push("Día inválido. No puede ser una fecha futura");
+      }
+    }
+
+    if (errores.length > 0) {
+      const mensaje = errores.join(". ");
+      setError(mensaje);
+      MensajeAviso(mensaje);
+      return false;
+    }
+
+    setError("");
+    return true;
   };
 
   const envio = (): void => {
-    if (!datosFormulario.dia || !datosFormulario.mes || !datosFormulario.anio) {
-      MensajeAviso("Por favor, complete todos los campos de la fecha.");
+    if (fecha === "") {
+      MensajeAviso("El campo de fecha no puede estar vacío");
       return;
-    } else {
-      MensajeExito(
-        "Fecha enviada correctamente " +
-          datosFormulario.dia +
-          " / " +
-          datosFormulario.mes +
-          " / " +
-          datosFormulario.anio
-      );
-      setDatosFormulario({ dia: "", mes: "", anio: "" });
+    }
+    if (fecha.length < 10) {
+      MensajeAviso("La fecha debe tener 10 caracteres");
+      return;
+    }
+    const resultado = validarFecha(fecha);
+    if (resultado) {
+      MensajeExito("Fecha válida. Envío exitoso");
     }
   };
 
   return (
     <form action="">
-      <div className="campo-fecha">
-        <select
-          name="dia"
-          id="dia"
-          onChange={manejarCambio}
-          value={datosFormulario.dia}
-        >
-          <option value="">Día</option>
-          {Array.from({ length: 31 }, (_, i) => i + 1).map((day) => (
-            <option key={day} value={day}>
-              {day}
-            </option>
-          ))}
-        </select>
+      <div className="area-ingreso-data">
+        <label className="label-fecha">
+          Ingrese su fecha de nacimiento (dd/mm/aaaa)
+        </label>
+        <input
+          type="text"
+          className="input-fecha"
+          value={fecha}
+          onChange={(e) =>
+            setFecha((e.target.value = e.target.value.replace(/[^0-9/]/g, "")))
+          }
+          pattern="\d{2}/\d{2}/\d{4}"
+          placeholder="18/04/2002"
+          maxLength={10}
+        />
       </div>
-
-      <div className="campo-fecha">
-        <select
-          name="mes"
-          id="mes"
-          onChange={manejarCambio}
-          value={datosFormulario.mes}
-        >
-          <option value="">Mes</option>
-          {Array.from({ length: 20 }, (_, i) => i + 1).map((month) => (
-            <option key={month} value={month}>
-              {month}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="campo-fecha">
-        <select
-          name="anio"
-          id="anio"
-          onChange={manejarCambio}
-          value={datosFormulario.anio}
-        >
-          <option value="">Año</option>
-          {Array.from({ length: 30 }, (_, i) => 2000 + i).map((year) => (
-            <option key={year} value={year}>
-              {year}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="campo-fecha boton-contenedor">
-        <Button
-          color="success"
-          disabled={false}
-          onClick={() => {
-            envio();
-          }}
-          size="lg"
-          variant="solid"
-          className="boton-enviar"
-        >
-          Enviar
-        </Button>
-      </div>
+      <Button
+        color="success"
+        disabled={false}
+        onClick={() => {
+          envio();
+        }}
+        size="lg"
+        variant="solid"
+        className="boton-enviar"
+      >
+        Enviar
+      </Button>
     </form>
   );
 };
