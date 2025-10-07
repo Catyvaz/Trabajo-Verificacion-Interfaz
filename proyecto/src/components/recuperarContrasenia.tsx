@@ -9,6 +9,9 @@ import { MensajeAviso, MensajeError, MensajeExito } from "./mensajes";
 import EmailTwoToneIcon from "@mui/icons-material/EmailTwoTone";
 import VpnKeyTwoToneIcon from "@mui/icons-material/VpnKeyTwoTone";
 import PasswordTwoToneIcon from "@mui/icons-material/PasswordTwoTone";
+import IconButton from "@mui/material/IconButton";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const steps = [
   { nombre: "Email", icono: EmailTwoToneIcon },
@@ -24,6 +27,7 @@ export const RecuperarContrasenia: React.FC = () => {
   const [codigoIngresado, setCodigoIngresado] = React.useState("");
   const [contrasenia, setContrasenia] = React.useState("");
   const emailRef = React.useRef<HTMLInputElement | null>(null);
+  const [mostrar, setMostrar] = React.useState<boolean>(false);
   const isValidEmail = (value: string) =>
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
@@ -55,11 +59,11 @@ export const RecuperarContrasenia: React.FC = () => {
       MensajeExito("Código verificado correctamente.");
     }
 
-    if(activeStep === 2 && contrasenia === ""){
+    if (activeStep === 2 && contrasenia === "") {
       MensajeAviso("La contraseña no puede estar vacía.");
       return;
     }
-    if(activeStep === 2 && contrasenia.length < 6){
+    if (activeStep === 2 && contrasenia.length < 6) {
       MensajeAviso("La contraseña debe tener al menos 6 caracteres.");
       return;
     }
@@ -144,15 +148,33 @@ export const RecuperarContrasenia: React.FC = () => {
       {activeStep === 2 && (
         <div className="contenido-step">
           <label className="texto-pasos">Ingresa la nueva contraseña.</label>
-          <input
-            min={8}
-            type="password"
-            placeholder="Nueva contraseña"
-            className="input-step"
-            required
-            value={contrasenia}
-            onChange={(e) => {setContrasenia(e.target.value)}}
-          />
+          <div className="vernover">
+            <input
+              min={8}
+              type={mostrar ? "text" : "password"}
+              placeholder="Nueva contraseña"
+              className="input-step"
+              required
+              value={contrasenia}
+              onChange={(e) => {
+                setContrasenia(e.target.value);
+              }}
+            />
+            <IconButton
+              color="primary"
+              size="small"
+              className="boton-ojo"
+              onClick={() => setMostrar((m) => !m)}
+              aria-label={mostrar ? "Ocultar contraseña" : "Mostrar contraseña"}
+              title={mostrar ? "Ocultar" : "Mostrar"}
+            >
+              {mostrar ? (
+                <VisibilityOff fontSize="small" />
+              ) : (
+                <Visibility fontSize="small" />
+              )}
+            </IconButton>
+          </div>
         </div>
       )}
 
