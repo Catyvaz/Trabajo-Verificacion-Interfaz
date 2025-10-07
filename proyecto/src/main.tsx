@@ -9,7 +9,7 @@ createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
       <App />
       
-    <ToastContainer/>
+    <ToastContainer limit={2}/>
     </BrowserRouter>
   </React.StrictMode>
 );

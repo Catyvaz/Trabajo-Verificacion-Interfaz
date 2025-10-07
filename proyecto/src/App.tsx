@@ -78,6 +78,7 @@ const AppContent = () => {
       <Route path="/" element={<Sidenav
               listaItems={menuItems}
               contenido={<FechaIncorrecta />}
+              titulo="Error oculto del campo de fecha"
             />} />
       <Route
         path="/campo-fecha"
@@ -85,6 +86,7 @@ const AppContent = () => {
             <Sidenav
               listaItems={menuItems}
               contenido={<FechaIncorrecta />}
+              titulo="Error oculto del campo de fecha"
             />
         }
       />
@@ -94,6 +96,7 @@ const AppContent = () => {
             <Sidenav
               listaItems={menuItems}
               contenido={<RecuperarContrasenia />}
+              titulo="Navegación lógica vs flujo roto"
             />
         }
       />
@@ -103,6 +106,7 @@ const AppContent = () => {
             <Sidenav
               listaItems={menuItems}
               contenido={<ReglaDeNegocio />}
+              titulo="Regla de negocio y el botón gris"
             />
         }
       />
@@ -112,6 +116,7 @@ const AppContent = () => {
             <Sidenav
               listaItems={menuItems}
               contenido={< MenuSuperior/>}
+              titulo="Cobertura de la interfaz con particiones"
             />
         }
       />
@@ -121,6 +126,7 @@ const AppContent = () => {
             <Sidenav
               listaItems={menuItems}
               contenido={<ContraseniaIncorrecta />}
+              titulo="El impacto de la validacion en el cliente"
             />
         }
       />

@@ -2,18 +2,30 @@ import type { JSX, ReactElement } from "react";
 import { type ItemsProps } from "../App";
 import { Link } from "react-router-dom";
 import "../style/sidenav.css";
+import { MensajeConsigna } from "./mensajes";
+import Button from "@mui/joy/Button";
 
 interface SidenavProps {
   listaItems: ItemsProps[];
   contenido: ReactElement;
   titulo?: string;
+  consigna?: string;
 }
 
 export const Sidenav = ({
   listaItems,
   contenido,
   titulo,
+  consigna,
 }: SidenavProps): JSX.Element => {
+  const handleConsigna = () => {
+    if (consigna) {
+      MensajeConsigna(consigna);
+    } else {
+      MensajeConsigna("No hay consigna disponible");
+    }
+  };
+
   return (
     <>
       <div className="contenedor-principal">
@@ -35,8 +47,18 @@ export const Sidenav = ({
           ))}
         </ul>
         <div className="contenedor-contenido">
-          <header>
+          <header className="header-side">
             <h1 className="titulo-contenido">{titulo}</h1>
+            <Button
+              color="primary"
+              disabled={false}
+              size="lg"
+              variant="outlined"
+              onClick={handleConsigna}
+              className="btn-consigna"
+            >
+              consigna
+            </Button>
           </header>
           <div className="contenedor-ejercicio">{contenido}</div>
         </div>

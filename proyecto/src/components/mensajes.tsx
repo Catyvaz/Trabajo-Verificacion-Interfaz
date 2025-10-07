@@ -45,3 +45,18 @@ export const MensajeError = (mensaje: string): JSX.Element => {
   });
     return <></>;
 };
+
+export const MensajeConsigna = (mensaje: string): JSX.Element => {
+    toast(mensaje, {
+    position: "top-center",
+    autoClose: 7000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark",
+    transition: Bounce
+  });
+    return <></>;
+};

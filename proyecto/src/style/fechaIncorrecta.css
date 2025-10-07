@@ -4,11 +4,11 @@ form {
   justify-items: center;
   align-items: center;
   grid-template-columns: repeat(4, 1fr);
-  background: #ffffff;
+  background-color: rgb(255, 255, 255, 60%);
+  backdrop-filter: blur(50px);
   border-radius: 12px;
   border: 1px solid #e5e7eb;
-  padding: 3%;
-  gap: 0%;
+  padding: 4%;
 }
  
 select {
