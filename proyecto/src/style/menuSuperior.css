@@ -1,9 +1,27 @@
+.contenedor-menu-superior {
+  width: 80%;
+  height: 80%;
+  grid-template-columns: repeat(4, 1fr);
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(50px);
+  box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  padding: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 header {
-  width: 100%;
+  width: 90%;
   background-color: #333;
   color: white;
   padding: 1% 0%;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px 10px 0px 0px;
 }
 
 .contenedor-elementos {
@@ -12,7 +30,7 @@ header {
   padding: 0 3svh;
 }
 
-ul {
+.barra-opciones {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -20,19 +38,41 @@ ul {
   background-color: #333;
   display: flex;
   flex-direction: row;
+  gap: 2rem;
+  color: aliceblue;
 }
 
 li {
   color: white;
-  padding: 14px 20px;
+  padding: 1rem;
   text-decoration: none;
 }
 
 li a {
-  color: rgb(210, 181, 230);
+  color: #a9ebfc;
   text-decoration: none;
 }
 
 li a:hover {
-  color: blueviolet;
+  color: #09d5da;
+}
+
+.elemento-seleccionado{
+  padding: 0.5rem;
+}
+
+.elemento-seleccionado.active {
+  border-top: 2px solid #09d5da;
+  color: #09d5da;
+}
+
+.contenedor-contenido-ejemplo {
+  width: 90%;
+  height: 100%;
+  border-radius: 0px 0px 12px 12px;
+  justify-content: center;
+  display: flex;
+  background-color: white;
+  padding: 5rem 0;
+  text-align: center;
 }
