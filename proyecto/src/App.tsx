@@ -9,7 +9,7 @@ import HttpsOutlinedIcon from '@mui/icons-material/HttpsOutlined';
 import { Route, Routes, useLocation } from "react-router-dom";
 import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
 import { Sidenav } from "./components/sidenav";
-import { RecuperarContrasenia } from "./components/recuperarContraseña/recuperarContrasenia";
+import { RecuperarContrasenia } from "./components/recuperarContrasenia";
 import ReglaDeNegocio from "./components/reglaDeNegocio";
 import { MenuSuperior } from "./components/menuSuperior/menuSuperior";
 import { ContraseniaIncorrecta } from "./components/contraseniaIncorrecta";
@@ -87,6 +87,7 @@ const AppContent = () => {
               listaItems={menuItems}
               contenido={<FechaIncorrecta />}
               titulo="Error oculto del campo de fecha"
+              consigna="Validación de datos (Testing) y controles de entrada (UI). Escenario: se tiene un campo de entrada para la fecha de nacimiento que solo acepta el formato DD/MM/AAAA. El programador olvidó que el mes fuera menos o igual a 12."
             />
         }
       />
@@ -97,6 +98,7 @@ const AppContent = () => {
               listaItems={menuItems}
               contenido={<RecuperarContrasenia />}
               titulo="Navegación lógica vs flujo roto"
+              consigna="Pruebas de flujo/proceso (Testing) y usabilidad/diseño de navegación (UI). Escenario: Están probando el proceso de 'recuperar contraseña' en un sitio web. El flujo lógico, definido en la etapa de testing es: Pantalla 1 (ingresar email) -> Pantalla 2 (ingresar código de seguridad) -> Pantalla 3 (nueva contraseña)."
             />
         }
       />

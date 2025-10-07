@@ -1,19 +1,94 @@
 .contenedor-stepper {
-  width: 80%;
+  width: 70%;
   grid-template-columns: repeat(4, 1fr);
-  background: #ffffff;
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(50px);
+  box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   border: 1px solid #e5e7eb;
   padding: 3%;
   gap: 2%;
 }
 
-.stepLabel{
-    color: black !important;
-    font-weight: 600 !important;
+/*decoracion de los steper arriba*/
+.css-3hpdci-MuiSvgIcon-root-MuiStepIcon-root.Mui-active {
+  color: #902ef5 !important;
 }
 
-.contenido-step{
-    margin: 2%;
-    margin-top: 4%;
+.css-3hpdci-MuiSvgIcon-root-MuiStepIcon-root.Mui-completed {
+  color: #500e8f !important;
+}
+ 
+.css-14ncu80-MuiStepConnector-line{
+  border-color: #500e8f !important;
+}
+
+.css-12eb3rq-MuiStepLabel-label{
+  color: black !important;
+  font-weight: 500 !important;
+  font-size: larger !important;
+}
+
+.MuiStepLabel-label,
+.css-12eb3rq-MuiStepLabel-label {
+  display: flex !important;
+  gap: 0.5rem !important;
+  align-items: center !important;
+  line-height: 1 !important;
+  margin-top: 0 !important;
+}
+
+/*estilos para el contenido*/
+.contenido-step {
+  margin: 5% 0%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.texto-pasos{
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #000000;
+  margin-bottom: 2%;
+}
+
+.texto-pasos.final{
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 2%;
+}
+
+.input-step{
+  padding: 0.5rem;
+  font-size: 1.1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.boton-siguiente{
+  color: #500e8f !important;
+  border-color: #500e8f !important;
+  font-weight: 600 !important;
+}
+
+.boton-siguiente:hover{
+  background-color: rgb(80, 14, 143, 40%) !important;
+  color: white !important;
+  border-color: #500e8f !important;
+}
+
+.boton-atras{
+  color: #500e8f !important;
+  border-color: #500e8f !important;
+  font-weight: 600 !important;
+}
+
+.boton-atras:hover{
+  background-color: rgb(80, 14, 143, 40%) !important;
+  color: white !important;
+  border-color: #500e8f !important;
 }

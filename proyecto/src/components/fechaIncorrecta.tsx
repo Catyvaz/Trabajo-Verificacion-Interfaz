@@ -68,8 +68,9 @@ export const FechaIncorrecta: React.FC = () => {
     }
     const resultado = validarFecha(fecha);
     if (resultado) {
-      MensajeExito("Fecha válida. Envío exitoso");
+      MensajeExito("Fecha de nacimiento guardada con éxito: " + fecha);
     }
+    setFecha("");
   };
 
   return (

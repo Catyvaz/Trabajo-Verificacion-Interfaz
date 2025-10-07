@@ -4,10 +4,17 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
-import "../../style/recuperarContrasenia.css";
-import { MensajeAviso, MensajeError, MensajeExito } from "../mensajes";
+import "../style/recuperarContrasenia.css";
+import { MensajeAviso, MensajeError, MensajeExito } from "./mensajes";
+import EmailTwoToneIcon from "@mui/icons-material/EmailTwoTone";
+import VpnKeyTwoToneIcon from "@mui/icons-material/VpnKeyTwoTone";
+import PasswordTwoToneIcon from "@mui/icons-material/PasswordTwoTone";
 
-const steps = ["Email", "Código", "Nueva Contraseña"];
+const steps = [
+  { nombre: "Email", icono: EmailTwoToneIcon },
+  { nombre: "Código", icono: VpnKeyTwoToneIcon },
+  { nombre: "Nueva Contraseña", icono: PasswordTwoToneIcon },
+];
 
 export const RecuperarContrasenia: React.FC = () => {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -15,6 +22,10 @@ export const RecuperarContrasenia: React.FC = () => {
   const [email, setEmail] = React.useState("");
   const [codigo, setCodigo] = React.useState("");
   const [codigoIngresado, setCodigoIngresado] = React.useState("");
+  const [contrasenia, setContrasenia] = React.useState("");
+  const emailRef = React.useRef<HTMLInputElement | null>(null);
+  const isValidEmail = (value: string) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
   const isStepSkipped = (step: number) => {
     return skipped.has(step);
@@ -30,6 +41,11 @@ export const RecuperarContrasenia: React.FC = () => {
       MensajeAviso("Por favor, ingresa un correo electrónico válido.");
       return;
     } else if (activeStep === 0 && email !== "") {
+      if (!isValidEmail(email)) {
+        MensajeAviso("Ingresa un correo electrónico válido.");
+        emailRef.current?.reportValidity?.();
+        return;
+      }
       sendEmail();
     }
     if (activeStep === 1 && codigo !== codigoIngresado) {
@@ -37,6 +53,15 @@ export const RecuperarContrasenia: React.FC = () => {
       return;
     } else if (activeStep === 1 && codigo === codigoIngresado) {
       MensajeExito("Código verificado correctamente.");
+    }
+
+    if(activeStep === 2 && contrasenia === ""){
+      MensajeAviso("La contraseña no puede estar vacía.");
+      return;
+    }
+    if(activeStep === 2 && contrasenia.length < 6){
+      MensajeAviso("La contraseña debe tener al menos 6 caracteres.");
+      return;
     }
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -76,9 +101,10 @@ export const RecuperarContrasenia: React.FC = () => {
             stepProps.completed = false;
           }
           return (
-            <Step key={label} {...stepProps} className="step">
+            <Step key={label.nombre} {...stepProps} className="step">
               <StepLabel {...labelProps} className="stepLabel">
-                {label}
+                {label.nombre}
+                <label.icono className="icono-step" />
               </StepLabel>
             </Step>
           );
@@ -92,8 +118,9 @@ export const RecuperarContrasenia: React.FC = () => {
             verificación.
           </label>
           <input
+            ref={emailRef}
             type="email"
-            placeholder="Correo Electrónico"
+            placeholder="correo@electronico.com"
             className="input-step"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
@@ -118,52 +145,77 @@ export const RecuperarContrasenia: React.FC = () => {
         <div className="contenido-step">
           <label className="texto-pasos">Ingresa la nueva contraseña.</label>
           <input
+            min={8}
             type="password"
             placeholder="Nueva contraseña"
             className="input-step"
             required
+            value={contrasenia}
+            onChange={(e) => {setContrasenia(e.target.value)}}
           />
         </div>
       )}
 
       {activeStep === steps.length ? (
         <React.Fragment>
-          <label className="texto-pasos final">
-            All steps completed - you&apos;re finished
-          </label>
+          <div className="contenido-step">
+            <label className="texto-pasos final">
+              ¡Contraseña actualizada correctamente!
+            </label>
+          </div>
+
           <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
             <Box sx={{ flex: "1 1 auto" }} />
-            <Button onClick={handleReset}>Reset</Button>
+            <Button
+              onClick={handleReset}
+              variant="outlined"
+              className="boton-siguiente"
+            >
+              Volver a empezar
+            </Button>
           </Box>
         </React.Fragment>
       ) : (
         <React.Fragment>
           {activeStep === 0 ? (
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2, justifyContent: "flex-end" }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-end",
+              }}
+            >
               <Button
+                className="boton-siguiente"
+                variant="outlined"
                 onClick={async () => {
                   handleNext();
                 }}
+                size="large"
               >
-                {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                {activeStep === steps.length - 1 ? "Terminar" : "Siguiente"}
               </Button>
             </Box>
           ) : (
             <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
               <Button
+                className="boton-atras"
+                variant="outlined"
                 disabled={activeStep === 0}
                 onClick={handleBack}
                 sx={{ mr: 1, color: "white" }}
               >
-                Back
+                Atras
               </Button>
               <Box sx={{ flex: "1 1 auto" }} />
               <Button
+                className="boton-siguiente"
+                variant="outlined"
                 onClick={async () => {
                   handleNext();
                 }}
               >
-                {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                {activeStep === steps.length - 1 ? "Terminar" : "Siguiente"}
               </Button>
             </Box>
           )}
