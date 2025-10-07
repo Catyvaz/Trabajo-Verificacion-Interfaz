@@ -74,10 +74,15 @@
   border-radius: 50%;
 }
 
-li .nav-link.active {
+.contenedor-lista-elementos li a:hover {
+  color: purple;
+}
+
+.contenedor-lista-elementos li .nav-link.active {
   border-radius: 50%;
   padding: 0%;
   background-color: rgba(197, 94, 175, 0.18);
+  color: purple;
 }
 
 .contenedor-contenido {

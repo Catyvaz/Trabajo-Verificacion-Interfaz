@@ -22,9 +22,9 @@ form {
 }
 
 .label-fecha{
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  color: #333;
+  margin-bottom: 1%;
 }
 
 .input-fecha{
