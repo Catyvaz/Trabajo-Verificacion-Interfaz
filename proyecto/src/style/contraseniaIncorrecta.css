@@ -42,14 +42,61 @@
   background: none;
   border-radius: 50%;
   cursor: pointer;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
 }
 
-/* En pantallas pequeñas el input ocupa más ancho, reajustar posición */
-@media (max-width: 900px) {
-  .boton-ojo {
-    right: 16px;
+@media (max-width: 800px) {
+  .form-contra{
+    width: 100dvw;
+    height: 60dvh;
+    padding: 0%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
+  .cont-contra {
+    width: 100%;
+    padding: 1rem 0.75rem;
+    box-sizing: border-box;
+    gap: 1rem;
+  }
+
+  .label-contra {
+    font-size: 1.85rem;
+    margin-bottom: 0.25rem;
+    text-wrap: balance;
+  }
+
+  .info-contra {
+    font-size: 1.25rem;
+    width: 100%;
+    line-height: 1.35;
+  }
+
+  .cont-vernover {
+    width: 100%;
+  }
+
   .input-contra {
-    width: 70%;
+    font-size: 1.25rem;
+    padding: 0.9rem 1rem;
+    width: 100%;
+  }
+
+  .boton-ojo {
+    right: 1rem; 
+    width: 50px; 
+    height: 50px;
+    padding: 0.25rem;
+  }
+
+  .boton-ojo svg, .boton-ojo img, .boton-ojo span {
+    width: 40px;
+    height: 40px;
   }
 }

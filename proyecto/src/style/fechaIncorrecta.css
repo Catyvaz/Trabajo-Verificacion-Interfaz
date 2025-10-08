@@ -40,7 +40,9 @@ form {
 
 @media (max-width: 800px) {
   form {
-    width: 90%;
+    width: 100dvw;
+    height: 10dvh;
+    padding: 0%;
     height: 50%;
     align-items: center;
     justify-content: center;

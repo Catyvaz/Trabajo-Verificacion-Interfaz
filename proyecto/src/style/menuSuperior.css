@@ -86,7 +86,7 @@ li a:focus-visible {
 @media (max-width: 800px) {
   .contenedor-menu-superior {
     width: 100dvw;
-    height: 70dvh;
+    height: 50dvh;
     padding: 0;
     flex-direction: row; /* Side-by-side: nav (left) + content (right) */
     align-items: stretch;
@@ -94,7 +94,6 @@ li a:focus-visible {
   }
 
   header {
-    height: 100%;
     width: 38%;
     min-width: 200px;
     max-width: 320px;
