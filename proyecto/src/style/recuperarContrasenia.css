@@ -184,19 +184,6 @@
     font-size: 0.95rem !important;
     padding: 0.65rem 0 !important;
   }
-
-  /* Opcional: centrar stepper arriba y permitir scroll del contenido */
-  body,
-  html {
-    height: 100dvh;
-    overflow: hidden;
-  }
-
-  main,
-  .contenedor-stepper {
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
 }
 
 @media (min-width: 601px) and (max-width: 900px) {
