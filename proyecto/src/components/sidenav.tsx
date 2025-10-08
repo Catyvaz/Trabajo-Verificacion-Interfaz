@@ -57,7 +57,7 @@ export const Sidenav = ({
               onClick={handleConsigna}
               className="btn-consigna"
             >
-              consigna
+              Consigna
             </Button>
           </header>
           <div className="contenedor-ejercicio">{contenido}</div>
