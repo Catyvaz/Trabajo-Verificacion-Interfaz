@@ -109,6 +109,7 @@ const AppContent = () => {
               listaItems={menuItems}
               contenido={<ReglaDeNegocio />}
               titulo="Regla de negocio y el botón gris"
+              consigna="Reglas de negocio/validación (Testing) y disponibilidad de acciones(UI)"
             />
         }
       />

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../style/reglaDeNegocio.css";
+import ShoppingCartTwoToneIcon from "@mui/icons-material/ShoppingCartTwoTone";
 
 interface Producto {
   id: number;
@@ -95,19 +96,25 @@ const ReglaDeNegocio: React.FC = () => {
     const total = calcularTotal();
     alert(`Pedido enviado! Total: $${total.toFixed(2)}`);
     setCarrito([]);
+    setEntrega("");
   };
 
   return (
     <div className="regla-negocio-container">
-      <div className="contenedor-productos">
+      <div className="contenedor-lista-productos">
         <h2>Productos</h2>
         <ul className="lista-productos">
           {productos.map((producto) => (
             <li className="contenedor-productos" key={producto.id}>
-              <h3>{producto.nombre}</h3>
-              <p className="descripcion">{producto.descripcion}</p>
-              <p className="precio">Precio: ${producto.precio.toFixed(2)}</p>
-              <button onClick={() => agregarAlCarrito(producto)}>
+              <h3 className="titulo-producto">{producto.nombre}</h3>
+              <p className="descripcion-producto">{producto.descripcion}</p>
+              <p className="precio-producto">
+                Precio: ${producto.precio.toFixed(2)}
+              </p>
+              <button
+                onClick={() => agregarAlCarrito(producto)}
+                className="boton-agregar"
+              >
                 Agregar al carrito
               </button>
             </li>
@@ -115,57 +122,78 @@ const ReglaDeNegocio: React.FC = () => {
         </ul>
       </div>
       <div className="contenedor-carrito">
-        <h2>Carrito de Compras</h2>
-        <label htmlFor="">Lugar de entrega</label>
-        <select
-          required
-          id="lugar-entrega"
-          name="lugar-entrega"
-          onChange={(e) => {
-            setEntrega(e.target.value);
-          }}
-          value={entrega}
-          style={{
-            cursor: "pointer",
-          }}
-        >
-          <option value="" disabled>
-            Seleccione lugar de entrega
-          </option>
-          {lugarEntrega.map((lugar) => (
-            <option key={lugar} value={lugar}>
-              {lugar}
-            </option>
-          ))}
-        </select>
-        {carrito.length === 0 ? (
-          <p>El carrito está vacío</p>
-        ) : (
-          <ul className="lista-carrito">
-            {carrito.map((item) => (
-              <li className="item-carrito" key={item.id}>
-                <h3>{item.nombre}</h3>
-                <p className="precio">Precio: ${item.precio.toFixed(2)}</p>
-                <p>
-                  Cantidad:
-                  <input
-                    type="number"
-                    value={item.cantidad}
-                    min="1"
-                    onChange={(e) =>
-                      actualizarCantidad(item.id, parseInt(e.target.value))
-                    }
-                  />
-                </p>
-                <button onClick={() => eliminarDelCarrito(item.id)}>
-                  Eliminar
+        <div className="contenedor-partes">
+          <h2>
+            Carrito de Compras <ShoppingCartTwoToneIcon />
+          </h2>
+          <div className="contenedor-select-entrega">
+            <label className="label-entrega">Lugar de entrega</label>
+            <select
+              required
+              id="lugar-entrega"
+              name="lugar-entrega"
+              onChange={(e) => {
+                setEntrega(e.target.value);
+              }}
+              value={entrega}
+              style={{
+                cursor: "pointer",
+              }}
+            >
+              <option value="" disabled>
+                Seleccione lugar de entrega
+              </option>
+              {lugarEntrega.map((lugar) => (
+                <option key={lugar} value={lugar}>
+                  {lugar}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {carrito.length === 0 ? (
+            <p>El carrito está vacío</p>
+          ) : (
+            <div className="separador">
+              <ul className="lista-carrito">
+                {carrito.map((item) => (
+                  <li className="item-carrito" key={item.id}>
+                    <h3>{item.nombre}</h3>
+                    <p className="precio">Precio: ${item.precio.toFixed(2)}</p>
+                    <p className="cantidad">
+                      Cantidad:
+                      <input
+                        type="number"
+                        value={item.cantidad}
+                        min="1"
+                        max={50}
+                        onChange={(e) =>
+                          actualizarCantidad(item.id, parseInt(e.target.value))
+                        }
+                        className="input-cantidad"
+                      />
+                    </p>
+                    <button
+                      className="btn-eliminar"
+                      onClick={() => eliminarDelCarrito(item.id)}
+                    >
+                      Eliminar
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              <div>
+                <h3>Total: ${calcularTotal().toFixed(2)}</h3>
+                <button
+                  onClick={enviarPedido}
+                  disabled={entrega !== "" ? false : true}
+                >
+                  Enviar Pedido
                 </button>
-              </li>
-            ))}
-            <h3>Total: ${calcularTotal().toFixed(2)}</h3>
-            <button onClick={enviarPedido} disabled= {entrega !== "" ? false : true}>Enviar Pedido</button>
-          </ul>
-        )}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
