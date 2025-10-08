@@ -14,20 +14,20 @@ form {
   gap: 1.5rem;
 }
 
-.area-ingreso-data{
+.area-ingreso-data {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
 }
 
-.label-fecha{
+.label-fecha {
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1%;
 }
 
-.input-fecha{
+.input-fecha {
   align-self: center;
   text-align: center;
   padding: 0.5rem;
@@ -36,4 +36,28 @@ form {
   border-radius: 8px;
   width: 70%;
   box-sizing: border-box;
+}
+
+@media (max-width: 800px) {
+  form {
+    width: 90%;
+    height: 50%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .label-fecha {
+    font-size: 1.5rem;
+  }
+
+  .input-fecha{
+    width: 90%;
+    font-size: 1.5rem;
+  } 
+
+  .boton-enviar {
+    width: 60%;
+    font-size: 1.5rem !important;
+  }
 }

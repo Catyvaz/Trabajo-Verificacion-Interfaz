@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../style/reglaDeNegocio.css";
 import ShoppingCartTwoToneIcon from "@mui/icons-material/ShoppingCartTwoTone";
+import { MensajeError, MensajeExito } from "./mensajes";
 
 interface Producto {
   id: number;
@@ -89,12 +90,12 @@ const ReglaDeNegocio: React.FC = () => {
 
   const enviarPedido = () => {
     if (carrito.length === 0) {
-      alert("El carrito está vacío");
+      MensajeError("El carrito está vacío");
       return;
     }
 
     const total = calcularTotal();
-    alert(`Pedido enviado! Total: $${total.toFixed(2)}`);
+    MensajeExito(`Pedido enviado! Total: $${total.toFixed(2)}`);
     setCarrito([]);
     setEntrega("");
   };
