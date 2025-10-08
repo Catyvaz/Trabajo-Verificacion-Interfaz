@@ -26,6 +26,7 @@ export const ContraseniaIncorrecta: React.FC = () => {
     }
     if (regexValidacion.test(contrasenia)) {
       MensajeExito("Contraseña válida. ¡Éxito!");
+      setContrasenia("")
     } else {
       MensajeAviso(
         "Contraseña inválida. Debe tener 8+ caracteres, mayúscula, minúscula, número y símbolo."
@@ -38,7 +39,6 @@ export const ContraseniaIncorrecta: React.FC = () => {
       className="form-contra"
       onSubmit={(e) => {
         e.preventDefault();
-        envio();
       }}
     >
       <div className="cont-contra">
