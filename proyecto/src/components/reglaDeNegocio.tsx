@@ -186,6 +186,7 @@ const ReglaDeNegocio: React.FC = () => {
               <div>
                 <h3>Total: ${calcularTotal().toFixed(2)}</h3>
                 <button
+                className="btn-enviar-pedido"
                   onClick={enviarPedido}
                   disabled={entrega !== "" ? false : true}
                 >

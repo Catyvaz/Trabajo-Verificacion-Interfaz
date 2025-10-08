@@ -57,7 +57,13 @@ li a:hover {
   color: #09d5da;
 }
 
-.elemento-seleccionado{
+li a:focus-visible {
+  outline: 2px solid #09d5da;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.elemento-seleccionado {
   padding: 0.5rem;
 }
 
@@ -75,4 +81,92 @@ li a:hover {
   background-color: white;
   padding: 5rem 0;
   text-align: center;
+}
+
+@media (max-width: 800px) {
+  .contenedor-menu-superior {
+    width: 100dvw;
+    height: 70dvh;
+    padding: 0;
+    flex-direction: row; /* Side-by-side: nav (left) + content (right) */
+    align-items: stretch;
+    border-radius: 0; /* Seamless edge-to-edge */
+  }
+
+  header {
+    height: 100%;
+    width: 38%;
+    min-width: 200px;
+    max-width: 320px;
+    padding: 0;
+    border-radius: 0; /* Remove rounded top for side layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: #333;
+  }
+
+  .contenedor-elementos {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .barra-opciones {
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    height: 100%;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding-top: 1.5rem;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  .barra-opciones li {
+    width: 100%;
+  }
+
+  .barra-opciones a.elemento-seleccionado {
+    display: block;
+    width: 100%;
+    padding: 0.85rem 1.25rem;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    border-left: 4px solid transparent;
+    border-top: none;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .barra-opciones a.elemento-seleccionado.active {
+    background: linear-gradient(90deg, #09454f 0%, #0b5e68 100%);
+    color: #09d5da;
+    border-left: 4px solid #09d5da;
+  }
+
+  .barra-opciones a.elemento-seleccionado:not(.active):hover {
+    background-color: #2a2a2a;
+    color: #a9ebfc;
+  }
+
+  .contenedor-contenido-ejemplo {
+    width: 62%;
+    flex: 1;
+    height: 100%;
+    padding: 2rem 1rem 3rem 1rem;
+    border-radius: 0; /* Remove rounded bottom for unified layout */
+    overflow-y: auto;
+    text-align: left;
+  }
+
+  .contenedor-contenido-ejemplo h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .contenedor-contenido-ejemplo p {
+    font-size: 0.95rem;
+    line-height: 1.35;
+  }
 }
