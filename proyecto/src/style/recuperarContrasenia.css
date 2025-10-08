@@ -93,6 +93,11 @@
   cursor: pointer;
 }
 
+.boton-ojo .MuiSvgIcon-root {
+  font-size: 1.5rem !important;
+  color: #000;
+}
+
 .boton-siguiente {
   color: #500e8f !important;
   border-color: #500e8f !important;
