@@ -116,3 +116,96 @@
   color: white !important;
   border-color: #500e8f !important;
 }
+
+@media (max-width: 800px) {
+  .contenedor-stepper {
+    width: 95dvw;
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem;
+    box-shadow: none;
+    gap: 1rem;
+  }
+
+  /* Stepper: mostrar solo el paso activo (texto) para reducir ruido */
+  .MuiStepLabel-label,
+  .css-12eb3rq-MuiStepLabel-label {
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    white-space: nowrap;
+  }
+
+  /* Oculta los labels de pasos NO activos (solo ícono) */
+  .MuiStepLabel-root:not(.Mui-active) .MuiStepLabel-label,
+  .css-12eb3rq-MuiStepLabel-label:not(.Mui-active) {
+    display: none !important;
+  }
+
+  /* Íconos un poco más grandes para toque */
+  .MuiStepIcon-root,
+  .css-3hpdci-MuiSvgIcon-root-MuiStepIcon-root {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  /* Contenido de cada paso full width */
+  .contenido-step {
+    margin: 0;
+    width: 100%;
+    padding: 0.5rem 0 1rem;
+    gap: 1rem;
+  }
+
+  .texto-pasos,
+  .texto-pasos.final {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .input-step,
+  .vernover .input-step {
+    width: 90%;
+    font-size: 1.5rem;
+  }
+
+  .vernover {
+    width: 100%;
+  }
+
+  .boton-ojo .MuiSvgIcon-root {
+    font-size: 2.5rem !important;
+    color: #000;
+  }
+
+  .boton-siguiente,
+  .boton-atras {
+    width: 100%;
+    font-size: 0.95rem !important;
+    padding: 0.65rem 0 !important;
+  }
+
+  /* Opcional: centrar stepper arriba y permitir scroll del contenido */
+  body,
+  html {
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  main,
+  .contenedor-stepper {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .contenedor-stepper {
+    width: 90%;
+    padding: 2rem 2.25rem;
+    gap: 1.5rem;
+  }
+  .input-step {
+    width: 70%;
+  }
+}

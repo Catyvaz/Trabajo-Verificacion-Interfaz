@@ -162,7 +162,6 @@ export const RecuperarContrasenia: React.FC = () => {
             />
             <IconButton
               color="primary"
-              size="small"
               className="boton-ojo"
               onClick={() => setMostrar((m) => !m)}
               aria-label={mostrar ? "Ocultar contraseña" : "Mostrar contraseña"}
