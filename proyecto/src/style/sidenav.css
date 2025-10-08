@@ -115,7 +115,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: auto;
+    height: 20%;
     margin: 0;
     padding: 0.5rem 0.75rem;
     border-radius: 0;
@@ -123,6 +123,7 @@
     overflow-x: auto;
     scrollbar-width: none; /* Firefox */
   }
+
   .contenedor-lista-elementos::-webkit-scrollbar {
     display: none;
   }
